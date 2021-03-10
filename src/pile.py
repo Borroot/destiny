@@ -26,14 +26,38 @@ class Suits(Enum):
     DIAMONDS = auto()
 
 
-class Deck:
+class Pile:
 
-    def __init__(self):
-        self.cards = list(itertools.product(list(Value), list(Suits)))
+    def __init__(self, cards=None):
+        if cards is None:
+            self.cards = list(itertools.product(list(Value), list(Suits)))
+        else:
+            self.cards = cards
 
 
     def shuffle(self):
         random.shuffle(self.cards)
+
+
+    def split(self):
+        size = len(self.cards) // 2
+        return Pile(self.cards[:size]), Pile(self.cards[size:])
+
+
+    def pop(self):
+        return self.cards.pop(0)
+
+
+    def push(self, card):
+        self.cards.append(card)
+
+
+    def pushall(self, cards):
+        for card in cards: self.push(card)
+
+
+    def __getitem__(self, index):
+        return self.cards[index]
 
 
     def __iter__(self):
@@ -52,3 +76,7 @@ class Deck:
 
     def __str__(self):
         return "\n".join("%s\t%s" % (value, suit) for value, suit in self)
+
+
+    def __repr__(self):
+        return self.__str__()
