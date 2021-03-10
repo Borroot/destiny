@@ -37,6 +37,7 @@ class Pile:
 
     def shuffle(self):
         random.shuffle(self.cards)
+        return self
 
 
     def split(self):

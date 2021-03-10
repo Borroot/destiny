@@ -1,10 +1,10 @@
-from deck import Deck
+from destiny import Destiny
+from pile import Pile
 
 
 def main():
-    deck = Deck()
-    deck.shuffle()
-    print(deck)
+    destiny = Destiny()
+    print(destiny)
 
 
 if __name__ == "__main__":
