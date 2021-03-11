@@ -5,17 +5,10 @@ from destiny import Destiny
 
 
 def main():
-    results = []
-    games = 1000
-
-    for _ in range(games):
-        destiny = Destiny(decks=1, seed=None)
-        results.append(destiny.run())
-
-    print("Average %s; Minimum %s; Maximum %s;"
-            % (sum(results) // games, min(results), max(results)))
+    destiny = Destiny(decks=1, seed=None)
+    print(destiny.run())
+    print(destiny)
 
 
 if __name__ == "__main__":
-    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
     main()
