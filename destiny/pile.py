@@ -1,5 +1,6 @@
 import itertools
 import random
+import logging
 from value import Value
 from suit import Suit
 from card import Card
@@ -7,22 +8,24 @@ from card import Card
 
 class Pile:
 
-    def __init__(self, cards=None):
+    def __init__(self, decks=1, cards=None):
         if cards is None:
             self.cards = list(map(lambda card: Card(card[0], card[1]), \
-                    itertools.product(list(Value), list(Suit))))
+                    itertools.product(list(Value), list(Suit)))) * decks
         else:
             self.cards = cards
 
 
-    def shuffle(self):
+    def shuffle(self, seed=None):
+        if seed is not None: random.seed(seed)
         random.shuffle(self.cards)
         return self
 
 
     def split(self):
+        if len(self.cards) % 2 == 1: logging.warning("Pile could not be split equally in two.")
         size = len(self.cards) // 2
-        return Pile(self.cards[:size]), Pile(self.cards[size:])
+        return Pile(cards=self.cards[:size]), Pile(cards=self.cards[size:])
 
 
     def pop(self):
@@ -39,6 +42,10 @@ class Pile:
 
     def __getitem__(self, index):
         return self.cards[index]
+
+
+    def __len__(self):
+        return len(self.cards)
 
 
     def __iter__(self):

@@ -6,7 +6,7 @@ class Card:
 
 
     def __str__(self):
-        return "%s\t%s" % (self.value, self.suit)
+        return "%s %s" % (self.value, self.suit)
 
 
     def __repr__(self):
@@ -15,13 +15,13 @@ class Card:
 
     def __eq__(self, other):
         if isinstance(other, Card):
-            return self.value == other.value and self.suit == other.suit
+            return self.value == other.value
         return NotImplemented
 
 
     def __ne__(self, other):
         if isinstance(other, Card):
-            return self.value != other.value or self.suit != other.suit
+            return self.value != other.value
         return NotImplemented
 
 
@@ -33,7 +33,7 @@ class Card:
 
     def __le__(self, other):
         if isinstance(other, Card):
-            return self.__lt__(other) or self.__eq__(other)
+            return self.value <= other.value
         return NotImplemented
 
 
@@ -45,5 +45,5 @@ class Card:
 
     def __ge__(self, other):
         if isinstance(other, Card):
-            return self.__gt__(other) or self.__eq__(other)
+            return self.value >= other.value
         return NotImplemented

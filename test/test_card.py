@@ -12,9 +12,12 @@ class TestCard(unittest.TestCase):
         self.assertEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.SPADES))
         self.assertEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.SPADES))
 
-        self.assertNotEqual(Card(Value.TWO, Suit.SPADES), Card(Value.TWO, Suit.HEARTS))
-        self.assertNotEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.HEARTS))
-        self.assertNotEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.HEARTS))
+        self.assertEqual(Card(Value.TWO, Suit.SPADES), Card(Value.TWO, Suit.HEARTS))
+        self.assertEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.HEARTS))
+        self.assertEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.HEARTS))
+
+        self.assertNotEqual(Card(Value.TWO, Suit.SPADES), Card(Value.SIX, Suit.SPADES))
+        self.assertNotEqual(Card(Value.SIX, Suit.SPADES), Card(Value.TWO, Suit.SPADES))
 
 
     def test_equal_loose(self):
@@ -22,10 +25,17 @@ class TestCard(unittest.TestCase):
         self.assertLessEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.SPADES))
         self.assertLessEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.SPADES))
 
+        self.assertLessEqual(Card(Value.TWO, Suit.SPADES), Card(Value.TWO, Suit.HEARTS))
+        self.assertLessEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.HEARTS))
+        self.assertLessEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.HEARTS))
+
         self.assertGreaterEqual(Card(Value.TWO, Suit.SPADES), Card(Value.TWO, Suit.SPADES))
         self.assertGreaterEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.SPADES))
         self.assertGreaterEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.SPADES))
 
+        self.assertGreaterEqual(Card(Value.TWO, Suit.SPADES), Card(Value.TWO, Suit.HEARTS))
+        self.assertGreaterEqual(Card(Value.SIX, Suit.SPADES), Card(Value.SIX, Suit.HEARTS))
+        self.assertGreaterEqual(Card(Value.ACE, Suit.SPADES), Card(Value.ACE, Suit.HEARTS))
 
     def test_order_strict(self):
         self.assertLess(Card(Value.TWO, Suit.SPADES), Card(Value.THREE, Suit.SPADES))
