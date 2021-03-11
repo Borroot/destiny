@@ -1,36 +1,16 @@
-from enum import Enum, auto
 import itertools
 import random
-
-
-class Value(Enum):
-    TWO = auto()
-    THREE = auto()
-    FOUR = auto()
-    FIVE = auto()
-    SIX = auto()
-    SEVEN = auto()
-    EIGHT = auto()
-    NINE = auto()
-    TEN = auto()
-    JACK = auto()
-    QUEEN = auto()
-    KING = auto()
-    ACE = auto()
-
-
-class Suits(Enum):
-    SPADES = auto()
-    CLUBS = auto()
-    HEARTS = auto()
-    DIAMONDS = auto()
+from value import Value
+from suit import Suit
+from card import Card
 
 
 class Pile:
 
     def __init__(self, cards=None):
         if cards is None:
-            self.cards = list(itertools.product(list(Value), list(Suits)))
+            self.cards = list(map(lambda card: Card(card[0], card[1]), \
+                    itertools.product(list(Value), list(Suit))))
         else:
             self.cards = cards
 
@@ -76,7 +56,7 @@ class Pile:
 
 
     def __str__(self):
-        return "\n".join("%s\t%s" % (value, suit) for value, suit in self)
+        return "\n".join(str(card) for card in self)
 
 
     def __repr__(self):
